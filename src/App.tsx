@@ -1,24 +1,14 @@
+// React 불러오기
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// 포켓몬 도감 컴포넌트 불러오기
+import Pokemon from './components/Pokemon'; // src 폴더 바로 아래에 있으니까 './'로 불러옴
 
+// App 컴포넌트 정의
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* 여기서 도감 컴포넌트를 화면에 출력함 */}
+      <Pokemon />
     </div>
   );
 }

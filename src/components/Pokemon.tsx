@@ -30,17 +30,21 @@ const Pokedex: React.FC = () => {
 
   return (
     <div>
-      {/* 화면에 큰 제목 출력 */}
       <h1>포켓몬 도감</h1>
       
       {/* 포켓몬 목록을 하나씩 돌면서 이름 출력 */}
       <ul>
-        {pokemonList.map((pokemon, index) => (
-          <li key={index}>
-            {/* 포켓몬 이름만 보여줌 */}
-            {pokemon.name}
-          </li>
-        ))}
+      {pokemonList.map((pokemon, index) => {
+          const id = index + 1; // 포켓몬 ID는 1부터 시작
+          const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+
+          return (
+            <li key={pokemon.name}>
+              <img src={imageUrl} alt={pokemon.name} />
+              <span>{pokemon.name}</span>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
