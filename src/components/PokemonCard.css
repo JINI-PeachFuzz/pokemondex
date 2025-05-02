@@ -8,43 +8,40 @@
   position: relative; /* 내부요소위치기준점 */
 }
 
-/* 카드 내용 컨테이너 */
-.pokemon-card > div {
+.card-inner {
   width: 100%;
   height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
   transition: transform 0.6s;
-  backface-visibility: hidden;
+}
+
+.pokemon-card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
   position: absolute; /* 앞뒷면 겹치게! */
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* 넘치는 글자가 카드밖에 안넘어가도록 해줌 */
+  border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* 넘치는 글자가 카드밖에 안넘어가도록 해줌 */
-  text-align: center;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow-y: auto; /* 내용이 넘치면 스크롤 */
 }
 
-/* 앞면 */
 .card-front {
-  background-color: white;
+  background: white;
 }
 
-/* 뒷면 (초기에는 뒤에 있음) */
 .card-back {
-  background-color: #f5f5f5;
+  background: #f5f5f5;
   transform: rotateY(180deg);
-  overflow-y: auto; /* 글씨가 넘어가면 스크롤로 */
-}
-
-/* 카드가 뒤집힐 때 앞면은 뒤로, 뒷면은 앞으로 */
-.pokemon-card.flipped .card-front {
-  transform: rotateY(180deg);
-}
-
-.pokemon-card.flipped .card-back {
-  transform: rotateY(0deg);
 }

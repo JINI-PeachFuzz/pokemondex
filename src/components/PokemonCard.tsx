@@ -2,6 +2,30 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./PokemonCard.css";
 
+const translateType = (type: string) => {
+  const map: { [key: string]: string } = {
+    grass: "풀",
+    poison: "독",
+    fire: "불꽃",
+    water: "물",
+    flying: "비행",
+    bug: "벌레",
+    electric: "전기",
+    ground: "땅",
+    rock: "바위",
+    psychic: "에스퍼",
+    ice: "얼음",
+    dragon: "드래곤",
+    dark: "악",
+    fairy: "페어리",
+    steel: "강철",
+    ghost: "고스트",
+    fighting: "격투",
+    normal: "노말",
+  };
+  return map[type] || type; // 등록안된건 영어그대로 나오게
+};
+
 interface PokemonCardProps {
   name: string;
   image: string;
@@ -25,16 +49,14 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, image, id }) => {
         const korean = res.data.names.find(
           (n: any) => n.language.name === "ko"
         );
-        if (korean) {
-          setNameKor(korean.name);
-        }
+        if (korean) setNameKor(korean.name);
       })
       .catch(() => {
         alert("포켓몬 이름 정보를 불러오지 못했습니다.");
       });
   }, [id]);
 
-  // 카드가 클릭되어 뒤집히면 상세 정보 API 호출
+  // 카드가 클릭되어 뒤집히면 상세 정보 API 호출 (뒤집었을 때만 실행)
   useEffect(() => {
     if (flipped && !detail) {
       axios
@@ -51,33 +73,41 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, image, id }) => {
       className={`pokemon-card ${flipped ? "flipped" : ""}`}
       onClick={handleClick}
     >
-      {/* 앞면 */}
-      <div className="card-front">
-        <img src={image} alt={nameKor || name} />
-        <p>{nameKor || "정보를 불러오는 중입니다.."}</p>
-      </div>
+      {/* 회전 효과를 줄 박스 / 이게 있어야함 */}
+      <div className="card-inner">
+        {/* 앞면 */}
+        <div className="card-front">
+          <img src={image} alt={nameKor || name} />
+          <p>{nameKor || "불러오는 중..."}</p>
+        </div>
 
-      {/* 뒷면 */}
-      <div className="card-back">
-        {detail ? (
-          <>
-            <h3>
-              {nameKor} (#{id})
-            </h3>
-            <p>키: {detail.height}</p>
-            <p>몸무게: {detail.weight}</p>
-            <p>타입: {detail.types.map((t: any) => t.type.name).join(", ")}</p>
-            <p>
-              기술:{" "}
-              {detail.moves
-                .slice(0, 3)
-                .map((m: any) => m.move.name)
-                .join(", ")}
-            </p>
-          </>
-        ) : (
-          <p>정보 불러오는 중...</p>
-        )}
+        {/* 뒷면 */}
+        <div className="card-back">
+          {detail ? (
+            <>
+              <h3>
+                {nameKor} (#{id})
+              </h3>
+              <p>키: {detail.height}</p>
+              <p>몸무게: {detail.weight}</p>
+              <p>
+                타입:{" "}
+                {detail.types
+                  .map((t: any) => translateType(t.type.name))
+                  .join(", ")}
+              </p>
+              <p>
+                기술:{" "}
+                {detail.moves
+                  .slice(0, 3)
+                  .map((m: any) => m.move.name)
+                  .join(", ")}
+              </p>
+            </>
+          ) : (
+            <p>정보 불러오는 중...</p>
+          )}
+        </div>
       </div>
     </div>
   );
