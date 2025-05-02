@@ -1,7 +1,7 @@
 // React에서 기본 기능들을 불러옴 (컴포넌트 만들기용)
 // useState는 상태(state)를 저장하고 바꿀 수 있게 해주는 기능 -> count와 setCount가 있을 경우에 +1증가시켜주는 버튼을 만들었을 경우 useState가 상태를 초기값0에서 클릭할때의 상태를 저장하기 때문에 숫자가 증가되게 해줌. ->숫자, 문자열, 객체 등 상태 저장할 때 사용함
 // useEffect 는 화면이 처음 보이거나 상태가 바뀔 때 실행되는 코드(컴포넌트가 랜더링되거나 업데이트될 때)인데 처음 딱 1번 실행됌 / 의존성 배열이라고 함/입력하는 두 번째 매개변수를 뜻하고 배열의 내용이 변경되었을 경우 부수 효과 함수가 실행됨.-> API 호출, 타이머, 외부요소 사용시 사용함.
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 // API 요청을 쉽게 해주는 axios 라이브러리
 import axios from "axios";
 
@@ -83,4 +83,4 @@ const Pokedex: React.FC = () => {
   );
 };
 
-export default Pokemon;
+export default Pokedex;
