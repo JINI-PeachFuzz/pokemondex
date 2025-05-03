@@ -1,32 +1,44 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { getKoreanName } from "../utils/getKoreanName"; // 유틸 함수
+import { getKoreanName } from "../utils/getKoreanName";
 import "./ShadowGame.css";
 
 interface ShadowGameProps {
-  mode: "input" | "choice"; // 입력 또는 선택 모드
+  mode: "input" | "choice";
 }
 
 const ShadowGame: React.FC<ShadowGameProps> = ({ mode }) => {
-  const [answerId, setAnswerId] = useState<number>(1); // 정답 포켓몬 ID
-  const [imageUrl, setImageUrl] = useState<string>(""); // 그림자 이미지
-  const [koreanAnswer, setKoreanAnswer] = useState<string>(""); // 정답 한글 이름
-  const [options, setOptions] = useState<{ id: number; name: string }[]>([]); // 4지선다
-  const [userInput, setUserInput] = useState<string>(""); // 입력값
-  const [feedback, setFeedback] = useState<string>(""); // 결과
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const [koreanAnswer, setKoreanAnswer] = useState<string>("");
+  const [options, setOptions] = useState<{ id: number; name: string }[]>([]);
+  const [userInput, setUserInput] = useState<string>("");
+  const [feedback, setFeedback] = useState<string>("");
 
-  // 포켓몬 불러오는 함수
+  const testImageUrl = (id: number) =>
+    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+
+  const fallbackImageUrl = (id: number) =>
+    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+
+  const checkImageExists = async (url: string) => {
+    try {
+      const res = await fetch(url);
+      return res.ok;
+    } catch {
+      return false;
+    }
+  };
+
   const loadPokemon = async () => {
     const randId = Math.floor(Math.random() * 151) + 1;
-    setAnswerId(randId);
-    setImageUrl(
-      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${randId}.png`
-    );
+
+    const primaryUrl = testImageUrl(randId);
+    const fallbackUrl = fallbackImageUrl(randId);
+    const isValid = await checkImageExists(primaryUrl);
+    setImageUrl(isValid ? primaryUrl : fallbackUrl);
 
     const answerName = await getKoreanName(randId);
     setKoreanAnswer(answerName);
 
-    // 선택지 4개 생성
     if (mode === "choice") {
       const ids = new Set<number>();
       ids.add(randId);
@@ -40,8 +52,6 @@ const ShadowGame: React.FC<ShadowGameProps> = ({ mode }) => {
           return { id, name };
         })
       );
-
-      // 랜덤 섞기
       setOptions(optionsWithNames.sort(() => Math.random() - 0.5));
     }
   };
@@ -50,7 +60,6 @@ const ShadowGame: React.FC<ShadowGameProps> = ({ mode }) => {
     loadPokemon();
   }, [mode]);
 
-  // 정답 확인
   const checkAnswer = (input: string) => {
     if (input.trim() === koreanAnswer) {
       setFeedback("🎉 정답입니다! 포켓몬박사신가요?");
@@ -67,16 +76,19 @@ const ShadowGame: React.FC<ShadowGameProps> = ({ mode }) => {
 
   return (
     <div className="shadow-container">
-      <img
-        className="shadow-img"
-        src={imageUrl}
-        alt="포켓몬 그림자"
-        style={{
-          filter: feedback ? "none" : "brightness(0) saturate(100%)",
-          width: "200px",
-          height: "200px",
-        }}
-      />
+      {imageUrl && (
+        <img
+          className="shadow-img"
+          src={imageUrl}
+          alt="포켓몬 그림자"
+          style={{
+            filter: feedback ? "none" : "brightness(0) saturate(100%)",
+            mixBlendMode: feedback ? "normal" : "multiply",
+            width: "200px",
+            height: "200px",
+          }}
+        />
+      )}
 
       {mode === "input" ? (
         <div>

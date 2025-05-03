@@ -1,16 +1,16 @@
 .shadow-container {
   text-align: center;
-  color: black;
   margin-top: 40px;
+  background-color: white; /* 핵심: 부모 배경 하얗게 */
+  padding: 20px;
 }
 
 .shadow-img {
   width: 200px;
   height: 200px;
-  background-color: white;
+  filter: brightness(0); /* 검정 그림자 효과 */
   margin: auto;
-
-  filter: brightness(0) saturate(100%);
+  display: block;
 }
 
 .choices button {
