@@ -17,16 +17,17 @@ interface Pokemon {
 const Pokedex: React.FC = () => {
   // 포켓몬 리스트 상태. 기본값은 빈 배열
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-  const [offset, setOffset] = useState(0); // 몇 번째부터 불러올지 위한 offset
-  const loader = useRef(null); // 관찰 대상 요소 (화면 하단에 도달했는지 확인용)
+  const [offset, setOffset] = useState(0); // offset - API 호출 사 몇 번째부터 불러올지 정하는 값
+  // 옵셋=30이면 31번째부터 시작하는거
+  const loader = useRef(null); // 관찰 대상 요소 (화면 하단에 도달했는지 확인용) / 무한스크롤하고싶어서..
 
   // 포켓몬 데이터 불러오는 함수
   const fetchPokemon = async () => {
     try {
       const res = await axios.get(
         `https://pokeapi.co/api/v2/pokemon?limit=30&offset=${offset}`
-      );
-      setPokemonList((prev) => [...prev, ...res.data.results]); // 기존 리스트에 추가
+      ); // axios.get(...)으로 포켓몬 30마리를 가져옴
+      setPokemonList((prev) => [...prev, ...res.data.results]); // 기존 리스트에 추가 / 기존 배열에 이어붙임: setPokemonList((prev) => [...prev, ...새로운애들])
       setOffset((prev) => prev + 30); // 다음 요청을 위해 offset 30 증가
     } catch (error) {
       console.error("포켓몬 데이터를 불러오는 데 실패했습니다.", error);
@@ -48,7 +49,8 @@ const Pokedex: React.FC = () => {
     // loader div가 있다면 관찰 시작
     if (loader.current) {
       observer.observe(loader.current);
-    }
+    } // loader.current가 화면에 100% 보일 때(threshold: 1) → fetchPokemon() 호출
+    // -> 사용자가 스크롤을 내려 하단 감시 div가 보이면 새로운 포켓몬을 자동으로 추가로 불러와줌
 
     return () => {
       // 컴포넌트 언마운트 시 관찰 중지
@@ -66,6 +68,7 @@ const Pokedex: React.FC = () => {
         style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
       >
         {pokemonList.map((pokemon, index) => (
+          // map으로 카드들을 렌더링함
           <PokemonCard
             key={index}
             name={pokemon.name}
@@ -79,6 +82,7 @@ const Pokedex: React.FC = () => {
 
       {/* 무한 스크롤을 위한 감시 대상 div */}
       <div ref={loader} style={{ height: "50px", margin: "20px" }} />
+      {/* <div ref={loader} />는 화면 맨 아래 감시용 요소로 사용하기 위해서 넣은거 */}
     </>
   );
 };
