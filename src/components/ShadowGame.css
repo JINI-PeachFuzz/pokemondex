@@ -9,7 +9,8 @@
   height: 200px;
   background-color: white;
   margin: auto;
-  filter: brightness(0) contrast(1.2); /* 색을 전부 검정으로 */
+
+  filter: brightness(0) saturate(100%);
 }
 
 .choices button {

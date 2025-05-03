@@ -72,7 +72,7 @@ const ShadowGame: React.FC<ShadowGameProps> = ({ mode }) => {
         src={imageUrl}
         alt="포켓몬 그림자"
         style={{
-          filter: "drop-shadow(0 0 0 black)", // 검정 그림자처럼 보이게
+          filter: feedback ? "none" : "brightness(0) saturate(100%)",
           width: "200px",
           height: "200px",
         }}
