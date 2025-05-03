@@ -17,11 +17,10 @@ interface Pokemon {
 const Pokedex: React.FC = () => {
   // 포켓몬 리스트 상태. 기본값은 빈 배열
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-  const [offset, setOffset] = useState(0); // offset - API 호출 사 몇 번째부터 불러올지 정하는 값
+  const [offset, setOffset] = useState(0); // offset - API 호출 시 몇 번째부터 불러올지 정하는 값
   // 옵셋=30이면 31번째부터 시작하는거
   const loader = useRef(null); // 관찰 대상 요소 (화면 하단에 도달했는지 확인용) / 무한스크롤하고싶어서..
 
-  // 포켓몬 데이터 불러오는 함수
   const fetchPokemon = async () => {
     try {
       const res = await axios.get(

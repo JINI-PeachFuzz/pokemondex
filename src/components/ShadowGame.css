@@ -1,0 +1,14 @@
+.shadow-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #3b3486;
+}
+
+.shadow-img {
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+}
