@@ -1,14 +1,23 @@
 .shadow-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background: #3b3486;
+  text-align: center;
+  color: black;
+  margin-top: 40px;
 }
 
 .shadow-img {
   width: 200px;
-  height: auto;
-  margin-bottom: 20px;
+  height: 200px;
+  background-color: white;
+  margin: auto;
+}
+
+.choices button {
+  margin: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.feedback {
+  margin-top: 20px;
+  font-weight: bold;
 }
