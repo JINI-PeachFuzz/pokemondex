@@ -20,7 +20,7 @@ const ShadowGame: React.FC<ShadowGameProps> = ({ mode }) => {
     const randId = Math.floor(Math.random() * 151) + 1;
     setAnswerId(randId);
     setImageUrl(
-      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${randId}.png`
+      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${randId}.png`
     );
 
     const answerName = await getKoreanName(randId);
