@@ -1,14 +1,14 @@
 .shadow-container {
   text-align: center;
   margin-top: 40px;
-  background-color: white; /* 핵심: 부모 배경 하얗게 */
+  background-color: white; /*배경 하얗게*/
   padding: 20px;
 }
 
 .shadow-img {
   width: 200px;
   height: 200px;
-  filter: brightness(0); /* 검정 그림자 효과 */
+  filter: brightness(0); /*검정 그림자 효과*/
   margin: auto;
   display: block;
 }
