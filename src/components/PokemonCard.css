@@ -25,7 +25,7 @@
   height: 100%;
   backface-visibility: hidden; /* 넘치는 글자가 카드밖에 안넘어가도록 해줌 */
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,7 +45,7 @@
 }
 
 .card-back {
-  background: #f5f5f5;
+  background: #615b5b09;
   transform: rotateY(180deg);
   overflow-y: auto;
 
@@ -59,7 +59,12 @@
 }
 
 .pokemon-card img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 60%;
+  max-height: 90%;
   object-fit: contain; /* 비율 유지하면서 안 짤리게 */
+}
+
+.pokemon-card:hover {
+  transform: translateY(-8px);
+  transition: transform 0.2s ease-in-out;
 }

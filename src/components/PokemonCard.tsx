@@ -4,7 +4,7 @@ import sizes from "../global/styles/sizes";
 import "./PokemonCard.css";
 
 const cardStyle = {
-  width: sizes.medium,
+  width: sizes.big,
   height: sizes.big,
   padding: "13px",
 };
