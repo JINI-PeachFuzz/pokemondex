@@ -42,13 +42,13 @@ const Pokedex: React.FC = () => {
           fetchPokemon();
         }
       },
-      { threshold: 1 } // 요소가 100% 보이면 실행
+      { threshold: 1 } // 여기서 1은 요소가 화면에 100% 다 보여졌을 때만 감지함
     );
 
     // loader div가 있다면 관찰 시작
     if (loader.current) {
       observer.observe(loader.current);
-    } // loader.current가 화면에 100% 보일 때(threshold: 1) → fetchPokemon() 호출
+    } // loader.current가 화면에 100% 보일 때(threshold: 1) → fetchPokemon() 호출 / <div ref={loader} /> 부분을 의미함 (감시 대상)
     // -> 사용자가 스크롤을 내려 하단 감시 div가 보이면 새로운 포켓몬을 자동으로 추가로 불러와줌
 
     return () => {
@@ -57,7 +57,7 @@ const Pokedex: React.FC = () => {
         observer.unobserve(loader.current);
       }
     };
-  }, [loader.current]);
+  }, [loader.current]); // loader.current 값이 바뀔 때마다 실행됨
 
   return (
     <>
@@ -72,7 +72,7 @@ const Pokedex: React.FC = () => {
             key={index}
             name={pokemon.name}
             id={index + 1}
-            image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+            image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
               index + 1
             }.png`}
           />

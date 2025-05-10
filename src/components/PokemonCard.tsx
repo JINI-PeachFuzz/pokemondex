@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import sizes from "../global/styles/sizes";
-import colors from "../global/styles/colors";
 import "./PokemonCard.css";
 
 const cardStyle = {
   width: sizes.medium,
   height: sizes.big,
   padding: "13px",
-  backgroundColor: colors.primary,
 };
 
 const translateType = (type: string) => {
