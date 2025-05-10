@@ -1,6 +1,4 @@
 .pokemon-card {
-  width: 160px;
-  height: 220px;
   perspective: 1000px; /* 원근법 3D 효과 */
   cursor: pointer;
   margin: 10px;

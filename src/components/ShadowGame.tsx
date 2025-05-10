@@ -84,8 +84,6 @@ const ShadowGame: React.FC<ShadowGameProps> = ({ mode }) => {
           style={{
             filter: feedback ? "none" : "brightness(0) saturate(100%)", // 정답 맞추기 전엔 그림자로 맞춘후엔 컬러로!
             mixBlendMode: feedback ? "normal" : "multiply", // multiply : 배경이 흰색일 땐 실루엣처럼 보여짐
-            width: "200px",
-            height: "200px",
           }}
         />
       )}

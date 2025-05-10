@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import sizes from "../global/styles/sizes"
+import sizes from "../global/styles/sizes";
 import colors from "../global/styles/colors";
 import "./PokemonCard.css";
 
 const cardStyle = {
   width: sizes.medium,
-  height: "220px",
-  backgroundColor: colors.primary,
-  borderRadius: "12px",
-  padding: "10px",
-  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+  height: sizes.big,
+  padding: "13px",
+  backgroundColor: colors.secondary,
 };
 
 const translateType = (type: string) => {
@@ -69,7 +67,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, image, id }) => {
 
   // 카드가 클릭되어 뒤집히면 상세 정보 API 호출 (뒤집었을 때만 실행)
   // flipped는 카드가 클릭되어 뒤집혔는지 상태를 저장하는 값이고 detail은 카드가 뒤집혔을 때 한번만 API를 불러와 상세 정보를 저장함
-  
+
   /* 1. 카드앞면에서 이미지와 한글이름이 없으면 로딩텍스트나오게
   2. 카드클릭시 flipped상태를 반전시켜 앞/뒷면을 전환시킴
   3. 카드가 flipped상태일땐 API를 통해 상세정보 키, 몸무게,타입등 을 가져오게
@@ -86,7 +84,8 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, image, id }) => {
   }, [flipped, detail, id]);
 
   return (
-    <div style={cardStyle}
+    <div
+      style={cardStyle}
       className={`pokemon-card ${flipped ? "flipped" : ""}`}
       onClick={handleClick}
     >
