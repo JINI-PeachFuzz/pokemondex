@@ -1,23 +1,48 @@
-import React, { useState } from "react";
-import ShadowGame from "../components/ShadowGame";
+import React, { useState } from 'react'
+import GameSetup from '../components/GameSetup'
+import GamePlay from '../components/GamePlay'
+import GameResult from '../components/GameResult'
 
-const ShadowGamePage: React.FC = () => {
-  const [mode, setMode] = useState<"input" | "choice">("input");
+export default function ShadowGamePage() {
+  const [mode, setMode] = useState<'input' | 'choice' | null>(null)
+  const [numQuestions, setNumQuestions] = useState<number>(5)
+  const [currentStep, setCurrentStep] = useState<'setup' | 'play' | 'result'>('setup')
+  const [score, setScore] = useState(0)
 
   return (
-    <div>
-      <div style={{ textAlign: "center", marginBottom: "10px" }}>
-        <button onClick={() => setMode("input")}>직접 입력</button>
-        <button
-          onClick={() => setMode("choice")}
-          style={{ marginLeft: "10px" }}
-        >
-          4지선다형
-        </button>
-      </div>
-      <ShadowGame mode={mode} />
-    </div>
-  );
-};
+    <>
+      {currentStep === 'setup' && (
+        <GameSetup
+          mode={mode}
+          setMode={setMode}
+          numQuestions={numQuestions}
+          setNumQuestions={setNumQuestions}
+          onStart={() => setCurrentStep('play')}
+        />
+      )}
 
-export default ShadowGamePage;
+      {currentStep === 'play' && (
+        <GamePlay
+          mode={mode}
+          numQuestions={numQuestions}
+          onFinish={(finalScore) => {
+            setScore(finalScore)
+            setCurrentStep('result')
+          }}
+        />
+      )}
+
+      {currentStep === 'result' && (
+        <GameResult
+          score={score}
+          numQuestions={numQuestions}
+          onRestart={() => {
+            setScore(0)
+            setMode(null)
+            setCurrentStep('setup')
+          }}
+        />
+      )}
+    </>
+  )
+}
