@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HeaderTabs from "./components/HeaderTabs";
+import HeaderTabs from "./components/Header";
 import PokedexPage from "./pages/PokedexPage";
 import ShadowGamePage from "./pages/ShadowGamePage";
 import Footer from "./components/Footer";
