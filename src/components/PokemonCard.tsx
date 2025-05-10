@@ -8,7 +8,7 @@ const cardStyle = {
   width: sizes.medium,
   height: sizes.big,
   padding: "13px",
-  backgroundColor: colors.secondary,
+  backgroundColor: colors.primary,
 };
 
 const translateType = (type: string) => {

@@ -10,7 +10,7 @@ import PokemonCard from "./PokemonCard";
 // 포켓몬 개체 하나를 위한 타입 정의 (name과 url이 들어있는 객체)
 interface Pokemon {
   name: string; // 포켓몬 이름
-  url: string; // 상세 정보 URL (일단 지금은 안씀 혹시나해서 넣어둠)
+  url: string; // 상세 정보 URL
 }
 
 // 함수형 컴포넌트 정의. Pokedex 컴포넌트
