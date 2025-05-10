@@ -1,5 +1,5 @@
 .pokemon-card {
-  perspective: 1000px; /* 원근법 3D 효과 */
+  perspective: 1000px; /* 원근법 3D 효과 / 1000이 젤 나은듯? */
   cursor: pointer;
   margin: 10px;
   position: relative; /* 내부요소위치기준점 */
@@ -65,6 +65,7 @@
 }
 
 .pokemon-card:hover {
+  /* 마우스호버 위로 살짝 올라가게하는거 */
   transform: translateY(-8px);
   transition: transform 0.2s ease-in-out;
 }

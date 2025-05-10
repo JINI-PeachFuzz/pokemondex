@@ -100,7 +100,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, image, id }) => {
           {detail ? (
             <>
               <h3>
-                {nameKor} (#{id})
+                {nameKor} (No.{id})
               </h3>
               <p>키: {detail.height}</p>
               <p>몸무게: {detail.weight}</p>
