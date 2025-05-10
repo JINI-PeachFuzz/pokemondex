@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import sizes from "../global/styles/sizes"
+import colors from "../global/styles/colors";
 import "./PokemonCard.css";
+
+const cardStyle = {
+  width: sizes.medium,
+  height: "220px",
+  backgroundColor: colors.primary,
+  borderRadius: "12px",
+  padding: "10px",
+  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+};
 
 const translateType = (type: string) => {
   const map: { [key: string]: string } = {
@@ -75,7 +86,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ name, image, id }) => {
   }, [flipped, detail, id]);
 
   return (
-    <div
+    <div style={cardStyle}
       className={`pokemon-card ${flipped ? "flipped" : ""}`}
       onClick={handleClick}
     >
