@@ -61,7 +61,7 @@ const Pokedex: React.FC = () => {
 
   return (
     <>
-      <h1>포켓몬 도감</h1>
+    
       {/* 포켓몬 카드들을 출력하는 영역 */}
       <div
         style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}

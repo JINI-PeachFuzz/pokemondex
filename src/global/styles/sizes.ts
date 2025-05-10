@@ -3,7 +3,7 @@ const sizes = {
   small: "0.85rem",
   normal: "1rem",
   medium: "160px",
-  big: "220px",
+  big: "200px",
   extra: "300px",
 };
 
