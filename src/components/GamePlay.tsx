@@ -50,6 +50,17 @@ export default function GamePlay({
     setSelected(null);
   }, [currentQuestion]);
 
+  useEffect(() => {
+    if (showResult) {
+      const timer = setTimeout(() => {
+        handleNext();
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [showResult]);
+
+
   const handleAnswer = (answer: string) => {
     setSelected(answer);
     const correct = answer === pokemon?.name;
@@ -123,7 +134,9 @@ export default function GamePlay({
               : `❌ 앗! 정답은 ${pokemon?.name} 였답니다~ ❌`}
           </div>
           <br />
-          <div
+
+          
+          {/* <div
             style={{ display: "flex", justifyContent: "center", gap: "12px" }}
           >
             <button
@@ -138,9 +151,10 @@ export default function GamePlay({
             >
               그만하기
             </button>
-          </div>
+          </div> */}
         </div>
       )}
+      
     </div>
   );
 }

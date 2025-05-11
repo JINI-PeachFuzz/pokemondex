@@ -8,10 +8,9 @@ const buttons = {
     border: "1px solid brightgray",
     borderRadius: "6px",
     cursor: "pointer",
-    backgroundColor: colors.yellow,
+    backgroundColor: colors.brightgray,
     color: colors.black,
   },
-
 
   bluebutton: {
     padding: "8px 16px",
