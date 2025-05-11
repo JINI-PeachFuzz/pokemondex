@@ -79,7 +79,7 @@ export default function GamePlay({
   if (!pokemon) return <div>로딩 중...</div>;
 
   return (
-    <div style={{ textAlign: "center", marginTop: 35, padding: 30 }}>
+    <div style={{ textAlign: "center", marginTop: 35, padding: 20 }}>
       <h3>
         {currentQuestion} / {numQuestions} 문제
       </h3>
