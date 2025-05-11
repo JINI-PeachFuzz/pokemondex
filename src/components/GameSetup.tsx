@@ -1,4 +1,24 @@
 import React from "react";
+import "./ShadowGame.css";
+import colors from "../global/styles/colors";
+import sizes from "../global/styles/sizes";
+import buttons from "../global/styles/buttons";
+
+
+const modeButtonStyle = {
+  ...buttons.likebutton,
+  backgroundColor: colors.white,
+  color: colors.dark,
+  borderColor: colors.gray,
+  border: "2px solid brightgray",
+};
+
+const selectedButtonStyle = {
+  backgroundColor: colors.secondary,
+  color: colors.dark,
+  borderColor: colors.gray,
+  border: "2px solid brightgray",
+};
 
 type GameSetupProps = {
   mode: "input" | "choice" | null;
@@ -8,34 +28,50 @@ type GameSetupProps = {
   onStart: () => void;
 };
 
-export default function GameSetup({
-  mode,
-  setMode,
-  numQuestions,
-  setNumQuestions,
-  onStart,
-}: GameSetupProps) {
-  return (
-    <div style={{ textAlign: "center", marginTop: 50 }}>
-      <h2>모드를 선택해주세요</h2>
-      <button onClick={() => setMode("input")}>직접 입력</button>
-      <button onClick={() => setMode("choice")}>4지선다형</button>
-
-      <h3>🎯몇 문제에 도전하시나요❓</h3>
-      <select
-        value={numQuestions}
-        onChange={(e) => setNumQuestions(Number(e.target.value))}
-      >
-        <option value={10}>10문제 풀기</option>
-        <option value={20}>20문제 풀기</option>
-        <option value={30}>30문제 풀기</option>
-      </select>
-
-      <br/>
-      <br/>
-      <button onClick={onStart} disabled={!mode}>
-        도전하기
-      </button>
-    </div>
-  );
-}
+export default function GameSetup({ mode, setMode, numQuestions, setNumQuestions, onStart }: GameSetupProps) {
+    return (
+      <div style={{ textAlign: 'center', marginTop: '80px' }}>
+        <h2><strong>모드를 선택해주세요</strong></h2>
+  
+        <div className="mode-buttons">
+          <button
+            onClick={() => setMode('input')}
+            style={mode === 'input' ? { ...modeButtonStyle, ...selectedButtonStyle } : modeButtonStyle}
+          >
+            직접 입력
+          </button>
+          <button
+            onClick={() => setMode('choice')}
+            style={mode === 'choice' ? { ...modeButtonStyle, ...selectedButtonStyle } : modeButtonStyle}
+          >
+            4지선다형
+          </button>
+        </div>
+  
+        <h3 style={{ marginTop: 40, marginBottom: 30}}>🎯 <strong>몇 문제에 도전하시나요</strong> ❓</h3>
+        <select
+          value={numQuestions}
+          onChange={(e) => setNumQuestions(Number(e.target.value))}
+          style={{ fontSize: sizes.small, padding: '6px' }}
+        >
+          <option value={10}>10문제 풀기</option>
+          <option value={20}>20문제 풀기</option>
+          <option value={30}>30문제 풀기</option>
+        </select>
+  
+        <br /><br />
+        <button
+          onClick={onStart}
+          disabled={!mode}
+          style={{
+            ...buttons.likebutton,
+            ...(mode ? selectedButtonStyle : modeButtonStyle),
+            fontSize: sizes.tiny,
+          }}
+        >
+          도전하기
+        </button>
+      </div>
+    )
+  }
+  

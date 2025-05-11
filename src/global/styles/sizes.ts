@@ -1,7 +1,7 @@
 const sizes = {
-  tiny: "0.65rem",
-  small: "0.85rem",
-  normal: "1rem",
+  tiny: "10px",
+  small: "15px",
+  normal: "20px",
   medium: "160px",
   big: "200px",
   extra: "300px",
