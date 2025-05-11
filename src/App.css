@@ -40,3 +40,29 @@
   background-color: #ffd43b;
   font-weight: bold;
 }
+
+.bg-main {
+  background-image: url("./img/bg_pattern.jpg");
+  background-repeat: repeat;
+  background-size: auto;
+  background-attachment: fixed; 
+  min-height: 100vh;
+}
+
+.bg-pokedex {
+  background-image: url("./img/bg_pattern2.jpg");
+  background-repeat: repeat;
+  background-size: auto;
+
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+
+.bg-shadowgame {
+  background-image: url("./img/bg_pattern.jpg");
+  background-repeat: repeat;
+  background-size: auto;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
