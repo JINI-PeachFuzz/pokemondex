@@ -1,7 +1,13 @@
-.choice-buttons {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin-top: 10px;
-  }
-  
+.choice-buttons,
+.mode-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+select:focus {
+  outline: none;
+  border-color: inherit;
+  box-shadow: none;
+}

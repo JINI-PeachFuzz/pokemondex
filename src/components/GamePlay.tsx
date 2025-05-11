@@ -6,7 +6,7 @@ import "./ShadowGame.css";
 import colors from "../global/styles/colors";
 import buttons from "../global/styles/buttons";
 const { blue, danger } = colors;
-const { checkWbutton, likeBbutton, disabledBbutton, grayBbutton } = buttons;
+const { checkWbutton } = buttons;
 
 type GamePlayProps = {
   mode: "input" | "choice" | null;
@@ -60,7 +60,6 @@ export default function GamePlay({
     }
   }, [showResult]);
 
-
   const handleAnswer = (answer: string) => {
     setSelected(answer);
     const correct = answer === pokemon?.name;
@@ -88,14 +87,18 @@ export default function GamePlay({
       <img
         src={pokemon.image}
         alt="포켓몬"
-        style={{ filter: "brightness(0)", width: 200 }}
+        style={{
+          filter: showResult ? "brightness(1)" : "brightness(0)",
+          width: 200,
+          transition: "filter 0.3s ease-in-out",
+        }}
       />
 
       {mode === "input" ? (
         <>
           <input id="answerInput" />
           <button
-            style={checkWbutton}
+            style={checkWbutton} 
             onClick={() => {
               const value = (
                 document.getElementById("answerInput") as HTMLInputElement
@@ -135,7 +138,6 @@ export default function GamePlay({
           </div>
           <br />
 
-          
           {/* <div
             style={{ display: "flex", justifyContent: "center", gap: "12px" }}
           >
@@ -154,7 +156,6 @@ export default function GamePlay({
           </div> */}
         </div>
       )}
-      
     </div>
   );
 }

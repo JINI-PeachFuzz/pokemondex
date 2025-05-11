@@ -113,16 +113,14 @@ const buttons = {
   },
 
   checkWbutton: {
-    padding: '10px 20px',
-    fontSize: '16px',
-    border: '2px solid brightgray',
-    borderRadius: '5px',
-    fontWeight: 'bold',
+    padding: '12px',
+    fontSize: '30px',
+    border: 'none',
+    backgroundColor: 'transparent', // 배경 제거
     cursor: 'pointer',
-    backgroundColor: colors.white,
-    color: colors.dark,
     transition: '0.2s ease',
   },
+  
 };
 
 export default buttons;
