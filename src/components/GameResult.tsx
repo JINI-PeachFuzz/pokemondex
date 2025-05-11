@@ -14,7 +14,7 @@ export default function GameResult({
   onRestart,
 }: GameResultProps) {
   return (
-    <div style={{ textAlign: "center", marginTop: 50 }}>
+    <div style={{ textAlign: "center", marginTop: 90 }}>
       <h2>결과</h2>
       <p>
         🎉 총 {numQuestions}문제 중 {score}문제를 맞췄어요! 🎉

@@ -5,7 +5,7 @@ const buttons = {
   whitebutton: {
     padding: "8px 16px",
     fontSize: sizes.small,
-    border: "1px solid brightgray",
+    border: `1px solid ${colors.brightgray}`,
     borderRadius: "6px",
     cursor: "pointer",
     backgroundColor: colors.brightgray,
@@ -15,7 +15,7 @@ const buttons = {
   bluebutton: {
     padding: "8px 16px",
     fontSize: sizes.small,
-    border: "1px solid brightgray",
+    border: `1px solid ${colors.brightgray}`,
     borderRadius: "6px",
     cursor: "pointer",
     backgroundColor: colors.blue,
@@ -25,7 +25,7 @@ const buttons = {
   graybutton: {
     padding: "8px 16px",
     fontSize: sizes.small,
-    border: "1px solid brightgray",
+    border: `1px solid ${colors.brightgray}`,
     borderRadius: "6px",
     cursor: "pointer",
     backgroundColor: colors.gray,
@@ -35,7 +35,7 @@ const buttons = {
   likebutton: {
     padding: "8px 16px",
     fontSize: sizes.small,
-    border: "1px solid brightgray",
+    border: `1px solid ${colors.brightgray}`,
     borderRadius: "6px",
     cursor: "pointer",
     backgroundColor: colors.secondary,
@@ -45,7 +45,7 @@ const buttons = {
   choicebutton: {
     padding: "8px 16px",
     fontSize: sizes.small,
-    border: "1px solid brightgray",
+    border: `1px solid ${colors.brightgray}`,
     borderRadius: "6px",
     cursor: "pointer",
     backgroundColor: colors.primary,
@@ -55,7 +55,7 @@ const buttons = {
   disabledbutton: {
     padding: "8px 16px",
     fontSize: sizes.small,
-    border: "1px solid brightgray",
+    border: `1px solid ${colors.brightgray}`,
     borderRadius: "6px",
     cursor: "pointer",
     backgroundColor: colors.danger,
@@ -65,7 +65,7 @@ const buttons = {
   blueBbutton: {
     padding: "8px 16px",
     fontSize: sizes.small,
-    border: "1px solid brightgray",
+    border: `1px solid ${colors.brightgray}`,
     borderRadius: "6px",
     cursor: "pointer",
     backgroundColor: colors.blue,
@@ -75,7 +75,7 @@ const buttons = {
   grayBbutton: {
     padding: "8px 16px",
     fontSize: sizes.small,
-    border: "1px solid brightgray",
+    border: `1px solid ${colors.brightgray}`,
     borderRadius: "6px",
     cursor: "pointer",
     backgroundColor: colors.gray,
@@ -85,7 +85,7 @@ const buttons = {
   likeBbutton: {
     padding: "8px 16px",
     fontSize: sizes.small,
-    border: "1px solid brightgray",
+    border: `1px solid ${colors.brightgray}`,
     borderRadius: "6px",
     cursor: "pointer",
     backgroundColor: colors.secondary,
@@ -95,7 +95,7 @@ const buttons = {
   choiceBbutton: {
     padding: "8px 16px",
     fontSize: sizes.small,
-    border: "1px solid brightgray",
+    border: `1px solid ${colors.brightgray}`,
     borderRadius: "6px",
     cursor: "pointer",
     backgroundColor: colors.primary,
@@ -105,22 +105,34 @@ const buttons = {
   disabledBbutton: {
     padding: "8px 16px",
     fontSize: sizes.small,
-    border: "1px solid brightgray",
+    border: `1px solid ${colors.brightgray}`,
     borderRadius: "6px",
     cursor: "pointer",
     backgroundColor: colors.danger,
     color: colors.dark,
   },
 
+  checkbutton: {
+    padding: '10px 20px',
+    fontSize: '16px',
+    border: `2px solid ${colors.brightgray}`,
+    borderRadius: '5px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    backgroundColor: colors.brightgray,
+    color: colors.dark,
+    transition: '0.2s ease',
+  },
+
   checkWbutton: {
     padding: '12px',
     fontSize: '30px',
     border: 'none',
-    backgroundColor: 'transparent', // 배경 제거
+    backgroundColor: 'transparent',
+    color: colors.dark,
     cursor: 'pointer',
     transition: '0.2s ease',
-  },
-  
+  }
 };
 
 export default buttons;
