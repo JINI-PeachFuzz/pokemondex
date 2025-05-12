@@ -19,8 +19,12 @@ export default function GameResult({
       <p>
         🎉 총 {numQuestions}문제 중 {score}문제를 맞췄어요! 🎉
       </p>
-      <p>정답률 : {(score / numQuestions) * 100}%</p>
-      <button style={{...likeBbutton, fontWeight: "bold"}} onClick={onRestart}>
+      <p>정답률 : {Math.floor((score / numQuestions) * 100)}%</p>
+      {/* 소수점아래는 버림 / 첫째자리까지면 {((score / numQuestions) * 100).toFixed(1)}% 이런식으로.. */}
+      <button
+        style={{ ...likeBbutton, fontWeight: "bold" }}
+        onClick={onRestart}
+      >
         재도전하기
       </button>
     </div>
