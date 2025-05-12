@@ -16,40 +16,28 @@ function AppWrapper() {
 function AppWithBackground() {
   const location = useLocation();
 
+  let bgClass = "bg-main";
+  if (location.pathname === "/pokedex") {
+    bgClass = "bg-pokedex";
+  } else if (location.pathname === "/shadowgame") {
+    bgClass = "bg-shadowgame";
+  }
+
   return (
-    <div className="app-container">
-      <HeaderTabs />
+    <div className={bgClass}>
+      <div className="app-container">
+        <HeaderTabs />
 
-      <div className="main-content">
-        <Routes>
-          <Route
-            path="/pokedex"
-            element={
-              <div className="bg-pokedex">
-                <PokedexPage />
-              </div>
-            }
-          />
-          <Route
-            path="/shadowgame"
-            element={
-              <div className="bg-shadowgame">
-                <ShadowGamePage />
-              </div>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <div className="bg-main">
-                <div>메인 페이지</div>
-              </div>
-            }
-          />
-        </Routes>
+        <div className="main-content">
+          <Routes>
+            <Route path="/pokedex" element={<PokedexPage />} />
+            <Route path="/shadowgame" element={<ShadowGamePage />} />
+            <Route path="/" element={<div>메인 페이지</div>} />
+          </Routes>
+        </div>
+
+        <Footer />
       </div>
-
-      <Footer />
     </div>
   );
 }

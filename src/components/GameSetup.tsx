@@ -1,4 +1,3 @@
-import React from "react";
 import "./ShadowGame.css";
 import colors from "../global/styles/colors";
 import sizes from "../global/styles/sizes";
