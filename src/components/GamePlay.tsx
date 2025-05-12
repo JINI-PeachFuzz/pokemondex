@@ -69,14 +69,18 @@ export default function GamePlay({
   };
 
   const handleNext = () => {
-    if (currentQuestion < numQuestions) {
-      setCurrentQuestion((prev) => prev + 1);
-    } else {
-      onFinish(score);
-    }
+    setPokemon(null); // 일단 이전 포켓몬 제거해서 깜빡임 방지
+
+    setTimeout(() => {
+      if (currentQuestion < numQuestions) {
+        setCurrentQuestion((prev) => prev + 1);
+      } else {
+        onFinish(score);
+      }
+    }, 50); // 약간의 지연을 줘서 자연스러움 확보
   };
 
-  if (!pokemon) return <div>로딩 중...</div>;
+  if (!pokemon) return <div style={{ textAlign: "center", marginTop: 65, padding: 20 }}>다음 포켓몬을 섭외하는 중입니다..</div>;
 
   return (
     <div style={{ textAlign: "center", marginTop: 35, padding: 20 }}>
@@ -84,15 +88,19 @@ export default function GamePlay({
         {currentQuestion} / {numQuestions} 문제
       </h3>
 
-      <img
-        src={pokemon.image}
-        alt="포켓몬"
-        style={{
-          filter: showResult ? "brightness(1)" : "brightness(0)",
-          width: 200,
-          transition: "filter 0.3s ease-in-out",
-        }}
-      />
+      {pokemon ? (
+        <img
+          src={pokemon.image}
+          alt="포켓몬"
+          style={{
+            filter: showResult ? "brightness(1)" : "brightness(0)",
+            width: 200,
+            transition: "filter 0.3s ease-in-out",
+          }}
+        />
+      ) : (
+        <div style={{ height: 200 }} /> // 빈 공간 유지
+      )}
 
       {mode === "input" ? (
         <>
