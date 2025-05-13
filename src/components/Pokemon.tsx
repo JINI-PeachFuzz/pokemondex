@@ -1,3 +1,4 @@
+// React에서 기본 기능들을 불러옴 (컴포넌트 만들기용)
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import PokemonCard from "./PokemonCard";
@@ -15,6 +16,10 @@ interface PokedexProps {
 interface Pokemon {
   name: string;
   url: string;
+  id: number;
+  height: number;
+  weight: number;
+  koreanName: string;
 }
 
 const Pokedex: React.FC<PokedexProps> = ({
@@ -35,20 +40,40 @@ const Pokedex: React.FC<PokedexProps> = ({
       const res = await axios.get(
         `https://pokeapi.co/api/v2/pokemon?limit=30&offset=${offset}`
       );
-      const merged = [...pokemonList, ...res.data.results];
-      const uniqueList = [...new Map(merged.map((p) => [p.url, p])).values()];
+
+      const detailedResults: Pokemon[] = await Promise.all(
+        res.data.results.map(async (pokemon: any) => {
+          const id = Number(pokemon.url.split("/")[6]);
+          const detail = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+          const species = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+          const korean = species.data.names.find((n: any) => n.language.name === "ko");
+
+          return {
+            ...pokemon,
+            id,
+            height: detail.data.height,
+            weight: detail.data.weight,
+            koreanName: korean?.name || pokemon.name,
+          };
+        })
+      );
+
+      const merged = [...pokemonList, ...detailedResults];
+      const uniqueList = [
+        ...new Map(merged.map((pokemon) => [pokemon.url, pokemon])).values(),
+      ];
       setPokemonList(uniqueList);
+      setOffset((prev) => prev + 30);
     } catch (error) {
       console.error("포켓몬 데이터를 불러오는 데 실패했습니다.", error);
     }
   };
 
-  // 무한 스크롤
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          setOffset((prev) => prev + 30);
+          fetchPokemon();
         }
       },
       { threshold: 1 }
@@ -63,20 +88,30 @@ const Pokedex: React.FC<PokedexProps> = ({
         observer.unobserve(loader.current);
       }
     };
-  }, []);
+  }, [loader.current]);
 
-  // offset 변경될 때마다 fetch
-  useEffect(() => {
-    fetchPokemon();
-  }, [offset]);
-
-  // 정렬 및 필터링
   const filteredList = [...pokemonList]
-    .filter((pokemon) => pokemon.name.includes(search.toLowerCase()))
+    .filter((pokemon) =>
+      pokemon.name.includes(search.toLowerCase()) ||
+      pokemon.koreanName.includes(search)
+    )
     .sort((a, b) => {
-      if (sort === "name-asc") return a.name.localeCompare(b.name, "ko");
-      if (sort === "name-desc") return b.name.localeCompare(a.name, "ko");
-      return Number(a.url.split("/")[6]) - Number(b.url.split("/")[6]);
+      switch (sort) {
+        case "name":
+          return a.koreanName.localeCompare(b.koreanName, "ko");
+        case "number-desc":
+          return b.id - a.id;
+        case "weight-desc":
+          return b.weight - a.weight;
+        case "weight-asc":
+          return a.weight - b.weight;
+        case "height-desc":
+          return b.height - a.height;
+        case "height-asc":
+          return a.height - b.height;
+        default:
+          return a.id - b.id;
+      }
     });
 
   return (
@@ -90,17 +125,9 @@ const Pokedex: React.FC<PokedexProps> = ({
             if (e.key === "Enter") onSearchSubmit();
           }}
           placeholder="포켓몬 이름 검색"
-          style={{
-            padding: "10px",
-            width: "250px",
-            fontSize: "16px",
-            textAlign: "center",
-          }}
+          style={{ padding: "10px", width: "250px", fontSize: "16px" }}
         />
-        <button
-          onClick={onSearchSubmit}
-          style={{ marginLeft: "8px", padding: "10px" }}
-        >
+        <button onClick={onSearchSubmit} style={{ marginLeft: "8px", padding: "10px" }}>
           검색
         </button>
 
@@ -109,9 +136,10 @@ const Pokedex: React.FC<PokedexProps> = ({
           onChange={(e) => setSort(e.target.value)}
           style={{ marginLeft: "20px", padding: "10px" }}
         >
-          <option value="number">도감번호 순</option>
-          <option value="name-asc">이름 오름차순</option>
-          <option value="name-desc">이름 내림차순</option>
+          <option value="number-asc">도감번호 순</option>
+          <option value="name">이름 순</option>
+          <option value="weight-desc">무게 순</option>
+          <option value="height-desc">키 순</option>
         </select>
       </div>
 
@@ -125,11 +153,9 @@ const Pokedex: React.FC<PokedexProps> = ({
         {filteredList.map((pokemon) => (
           <PokemonCard
             key={pokemon.url}
-            name={pokemon.name}
-            id={Number(pokemon.url.split("/")[6])}
-            image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${Number(
-              pokemon.url.split("/")[6]
-            )}.png`}
+            name={pokemon.koreanName}
+            id={pokemon.id}
+            image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
           />
         ))}
       </div>
