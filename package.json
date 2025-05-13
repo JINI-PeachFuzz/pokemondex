@@ -25,9 +25,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://github.com/JINI-PeachFuzz/pokemondex",
+  "homepage": "https://jini-peachfuzz.github.io/pokemondex",
   "eslintConfig": {
     "extends": [
       "react-app",
