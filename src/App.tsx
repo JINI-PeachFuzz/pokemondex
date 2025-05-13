@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import HeaderTabs from "./components/Header";
 import PokedexPage from "./pages/PokedexPage";
 import ShadowGamePage from "./pages/ShadowGamePage";
