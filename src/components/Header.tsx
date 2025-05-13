@@ -7,7 +7,13 @@ import logoImg from "../img/logo.png";
 const HeaderTabs: React.FC = () => {
   const location = useLocation();
 
-  const currentPath = location.pathname;
+  const reloadTo = (path: string) => {
+    if (window.location.hash === `#${path}`) {
+      window.location.reload();
+    } else {
+      window.location.href = `#${path}`;
+    }
+  };
 
   return (
     <div className="header">
@@ -15,18 +21,18 @@ const HeaderTabs: React.FC = () => {
         src={logoImg}
         alt="Pokemon"
         className="logo"
-        onClick={() => (window.location.href = "#/")}
+        onClick={() => reloadTo("/")}
       />
       <div className="nav-buttons">
         <button
-          onClick={() => (window.location.href = "#/pokedex")}
-          className={currentPath === "/pokedex" ? "active" : ""}
+          onClick={() => reloadTo("/pokedex")}
+          className={location.pathname === "/pokedex" ? "active" : ""}
         >
           도감 보기
         </button>
         <button
-          onClick={() => (window.location.href = "#/shadowgame")}
-          className={currentPath === "/shadowgame" ? "active" : ""}
+          onClick={() => reloadTo("/shadowgame")}
+          className={location.pathname === "/shadowgame" ? "active" : ""}
         >
           그림자 게임
         </button>
