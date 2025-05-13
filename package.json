@@ -27,7 +27,7 @@
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://JINI-PeachFuzz.github.io/pokemondex",
+  "homepage": "https://github.com/JINI-PeachFuzz/pokemondex",
   "eslintConfig": {
     "extends": [
       "react-app",
