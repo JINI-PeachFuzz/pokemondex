@@ -27,7 +27,7 @@ const HeaderTabs: React.FC = () => {
           onClick={() => navigate("/shadowgame")}
           className={location.pathname === "/shadowgame" ? "active" : ""}
         >
-          그림자 맞추기 게임
+          그림자 게임
         </button>
       </div>
     </div>

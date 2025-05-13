@@ -25,7 +25,7 @@
   height: 100%;
   backface-visibility: hidden; /* 넘치는 글자가 카드밖에 안넘어가도록 해줌 */
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -45,10 +45,9 @@
 }
 
 .card-back {
-  background: #615b5b09;
+  background-color: #eeeeee;
   transform: rotateY(180deg);
   overflow-y: auto;
-
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -80,7 +80,12 @@ export default function GamePlay({
     }, 50); // 약간의 지연을 줘서 자연스러움 확보
   };
 
-  if (!pokemon) return <div style={{ textAlign: "center", marginTop: 65, padding: 20 }}>다음 포켓몬을 섭외하는 중입니다..</div>;
+  if (!pokemon)
+    return (
+      <div style={{ textAlign: "center", marginTop: 65, padding: 20 }}>
+        다음 포켓몬을 섭외하는 중입니다..
+      </div>
+    );
 
   return (
     <div style={{ textAlign: "center", marginTop: 35, padding: 20 }}>
@@ -103,20 +108,36 @@ export default function GamePlay({
       )}
 
       {mode === "input" ? (
-        <>
-          <input id="answerInput" />
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <input
+            id="answerInput"
+            style={{
+              padding: "8px",
+              marginLeft: "60px",
+              fontSize: "18px",
+              width: "250px",
+              border: "1px solid #ccc",
+              borderRadius: "6px",
+            }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                const value = (e.target as HTMLInputElement).value;
+                handleAnswer(value);
+              }
+            }}
+          />
           <button
-            style={checkWbutton}
+            style={{ ...checkWbutton }}
             onClick={() => {
-              const value = (
-                document.getElementById("answerInput") as HTMLInputElement
-              ).value;
+              const value = (document.getElementById("answerInput") as HTMLInputElement).value;
               handleAnswer(value);
             }}
           >
             🎯
           </button>
-        </>
+        </div>
+      </div>
       ) : (
         <div className="choice-buttons">
           {choices.map((choice) => (
