@@ -1,7 +1,8 @@
-// React에서 기본 기능들을 불러옴 (컴포넌트 만들기용)
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import PokemonCard from "./PokemonCard";
+import colors from "../global/styles/colors";
+const { secondary } = colors;
 
 interface PokedexProps {
   search: string;
@@ -44,9 +45,15 @@ const Pokedex: React.FC<PokedexProps> = ({
       const detailedResults: Pokemon[] = await Promise.all(
         res.data.results.map(async (pokemon: any) => {
           const id = Number(pokemon.url.split("/")[6]);
-          const detail = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-          const species = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
-          const korean = species.data.names.find((n: any) => n.language.name === "ko");
+          const detail = await axios.get(
+            `https://pokeapi.co/api/v2/pokemon/${id}`
+          );
+          const species = await axios.get(
+            `https://pokeapi.co/api/v2/pokemon-species/${id}`
+          );
+          const korean = species.data.names.find(
+            (n: any) => n.language.name === "ko"
+          );
 
           return {
             ...pokemon,
@@ -91,9 +98,10 @@ const Pokedex: React.FC<PokedexProps> = ({
   }, [loader.current]);
 
   const filteredList = [...pokemonList]
-    .filter((pokemon) =>
-      pokemon.name.includes(search.toLowerCase()) ||
-      pokemon.koreanName.includes(search)
+    .filter(
+      (pokemon) =>
+        pokemon.name.includes(search.toLowerCase()) ||
+        pokemon.koreanName.includes(search)
     )
     .sort((a, b) => {
       switch (sort) {
@@ -125,16 +133,31 @@ const Pokedex: React.FC<PokedexProps> = ({
             if (e.key === "Enter") onSearchSubmit();
           }}
           placeholder="포켓몬 이름 검색"
-          style={{ padding: "10px", width: "250px", fontSize: "16px" }}
+          style={{
+            padding: "10px",
+            width: "250px",
+            fontSize: "16px",
+            outline: "none",
+          }}
         />
-        <button onClick={onSearchSubmit} style={{ marginLeft: "8px", padding: "10px" }}>
+        <button
+          onClick={onSearchSubmit}
+          style={{
+            marginLeft: "10px",
+            padding: "10px 20px",
+            backgroundColor: secondary,
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+          }}
+        >
           검색
         </button>
 
         <select
           value={sortValue}
           onChange={(e) => setSort(e.target.value)}
-          style={{ marginLeft: "20px", padding: "10px" }}
+          style={{ marginLeft: "10px", padding: "10px" }}
         >
           <option value="number-asc">도감번호 순</option>
           <option value="name">이름 순</option>
