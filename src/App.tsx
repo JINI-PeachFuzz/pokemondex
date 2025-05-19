@@ -4,6 +4,7 @@ import PokedexPage from "./pages/PokedexPage";
 import ShadowGamePage from "./pages/ShadowGamePage";
 import Footer from "./components/Footer";
 import './App.css';
+import MainPage from "./pages/MainPage"; 
 
 function AppWrapper() {
   return (
@@ -32,7 +33,7 @@ function AppWithBackground() {
           <Routes>
             <Route path="/pokedex" element={<PokedexPage />} />
             <Route path="/shadowgame" element={<ShadowGamePage />} />
-            <Route path="/" element={<div>메인 페이지</div>} />
+            <Route path="/" element={<MainPage />} />
           </Routes>
         </div>
 
